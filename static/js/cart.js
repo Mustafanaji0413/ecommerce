@@ -11,8 +11,30 @@ for (var i = 0; i < updateBtns.length; i++) {
         if (user == 'AnonymouseUser') {
             console.log('User is not authenticated')
         } else{
-            console.log('User is authenticated, sending data...')
+            updateUserOder(productId, action)
         }
 
+    })
+}
+
+function updateUserOder(productId, action){
+    console.log('User is authenticated, sending data...')
+
+    var url = 'update_item/'
+
+    fetch(url, {
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({'productId': productId, 'action': action})
+    })
+
+    .then((response) =>{
+        return response.json()
+    })
+
+    .then((data) =>{
+        console.log('data', data)
     })
 }
